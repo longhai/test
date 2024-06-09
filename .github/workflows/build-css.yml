@@ -1,23 +1,20 @@
 name: Compile SCSS
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-    - run: npm install -g sass
-    - run: sass styles.scss styles.css
-    - name: Commit and Push
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add styles.css
-        git commit -m "Auto-compile SCSS"
-        git push
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Sass
+        run: npm install -g sass
+
+      - name: Compile SCSS
+        run: sass scss/styles.scss css/styles.css
