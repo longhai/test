@@ -1,5 +1,4 @@
-# .github/workflows/build-css.yml
-name: Build CSS
+name: Compile SCSS
 
 on:
   push:
@@ -11,26 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository content
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-
-      - name: Install dependencies
+      - name: Install Sass
         run: npm install -g sass
 
-      - name: Compile SCSS to CSS
-        run: sass scss:css
-
-      - name: Commit and push changes
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add css/
-          git commit -m 'Compile SCSS to CSS'
-          git push
-        env:
-          GITHUB_TOKEN: ${{ longhai.pat }}
+      - name: Compile SCSS
+        run: sass scss/styles.scss css/styles.css
