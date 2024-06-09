@@ -1,5 +1,4 @@
-# .github/workflows/build-css.yml
-name: Build CSS
+name: Build SCSS
 
 on:
   push:
