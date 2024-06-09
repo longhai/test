@@ -29,7 +29,7 @@ jobs:
 
     - name: Commit and push changes
       env:
-        GITHUB_TOKEN: ${{ LONGHAI.PAT }}
+        GITHUB_TOKEN: ${{ secrets.LONGHAI }}
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
