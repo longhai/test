@@ -21,8 +21,5 @@ jobs:
       - name: Install Sass
         run: npm install -g sass
 
-      - name: Create CSS directory if not exists
-        run: test -d css || mkdir css
-
       - name: Compile SCSS
-        run: sass scss/styles.scss css/styles.css
+        run: sass --no-source-map scss/styles.scss css/styles.css
