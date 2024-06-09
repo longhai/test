@@ -1,0 +1,38 @@
+/* scss/styles.scss */
+
+// Biến màu cho chế độ sáng
+$light-bg: #e0e5ec;
+$light-text: #000000;
+
+// Biến màu cho chế độ tối
+$dark-bg: #202020;
+$dark-text: #ecf0f1;
+
+// Mixin để áp dụng màu sắc
+@mixin theme($bg, $text) {
+  background-color: $bg;
+  color: $text;
+}
+
+// Các kiểu chung
+body {
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+// Áp dụng chế độ sáng theo mặc định
+body {
+  @include theme($light-bg, $light-text);
+}
+
+// Áp dụng chế độ tối khi chế độ tối được bật trên hệ điều hành
+@media (prefers-color-scheme: dark) {
+  body {
+    @include theme($dark-bg, $dark-text);
+  }
+}
+
+// Các kiểu khác
+h1 {
+  text-align: center;
+}
