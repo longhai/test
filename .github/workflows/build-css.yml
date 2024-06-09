@@ -1,33 +1,23 @@
-name: Deploy to GitHub Pages
+name: Compile SCSS
 
-on:
-  push:
-    branches:
-      - main  # Kích hoạt workflow khi có push tới nhánh main
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
+    - uses: actions/checkout@v2
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
         node-version: '14'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Compile SCSS to CSS
-      run: npm run build-css
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./css  # Thư mục chứa các tệp cần triển khai
-        # Optional: Set the branch to deploy to, default is gh-pages
-        # publish_branch: gh-pages
+    - run: npm install -g sass
+    - run: sass styles.scss styles.css
+    - name: Commit and Push
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add styles.css
+        git commit -m "Auto-compile SCSS"
+        git push
