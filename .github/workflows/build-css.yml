@@ -32,4 +32,4 @@ jobs:
           git commit -m 'Compile SCSS to CSS'
           git push
         env:
-          GITHUB_TOKEN: ${{ longhai.pat }}
+          GITHUB_TOKEN: ${{ secrets.longhai.pat }}
